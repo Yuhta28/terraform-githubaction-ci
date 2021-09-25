@@ -2,7 +2,7 @@ terraform {
   backend "remote" {
     organization = "Yuta28"
     workspaces {
-      name = "terraform-githubaction-ci"
+      name = "gh-actions-demo"
     }
   }
   required_providers {
