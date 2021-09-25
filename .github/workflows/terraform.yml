@@ -65,11 +65,21 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Configure AWS
+      run: |
+      export AWS_ROLE_ARN=arn:aws:iam::aws:policy/AdministratorAccess
+      export AWS_WEB_IDENTITY_TOKEN_FILE=/tmp/awscreds
+      export AWS_DEFAULT_REGION=ap-northeast-1
+
+      echo AWS_WEB_IDENTITY_TOKEN_FILE=$AWS_WEB_IDENTITY_TOKEN_FILE >> $GITHUB_ENV
+      echo AWS_ROLE_ARN=$AWS_ROLE_ARN >> $GITHUB_ENV
+      echo AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION >> $GITHUB_ENV
+
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      #with:
+      #  cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
