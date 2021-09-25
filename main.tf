@@ -21,10 +21,10 @@ provider "aws" {
 }
 
 resource "aws_instance" "app_server_yuta" {
-  ami           = "ami-00cb500575fd9f9be"
-  instance_type = "t2.micro"
-  vpc_security_group_ids = ["sg-058cda7badca49175","sg-0c5b21b30ff8741cd"]
-  subnet_id = "subnet-05b2284acd7a081db"
+  ami                    = "ami-00cb500575fd9f9be"
+  instance_type          = "t2.micro"
+  vpc_security_group_ids = ["sg-058cda7badca49175", "sg-0c5b21b30ff8741cd"]
+  subnet_id              = "subnet-05b2284acd7a081db"
 
   tags = {
     Name = var.instance_name
