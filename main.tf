@@ -3,14 +3,14 @@ terraform {
     bucket = "terraform-s3-yuta1993"
     key    = "terraform.tfstate"
     region = "ap-northeast-1"
-    
+
   }
-# backend "remote" {
-#   organization = "Yuta28"
-#   workspaces {
-#     name = "gh-actions-demo"
-#   }
-# }
+  # backend "remote" {
+  #   organization = "Yuta28"
+  #   workspaces {
+  #     name = "gh-actions-demo"
+  #   }
+  # }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
