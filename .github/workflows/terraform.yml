@@ -37,9 +37,9 @@ jobs:
 #        aws-region: ap-northeast-1
         cli_config_credentials_token: $ACTIONS_ID_TOKEN_REQUEST_URL
     
-    # SSH connection
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+#    # SSH connection
+#    - name: Setup tmate session
+#      uses: mxschmitt/action-tmate@v3
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
