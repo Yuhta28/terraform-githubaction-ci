@@ -29,7 +29,7 @@ jobs:
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@master
 #      uses: hashicorp/setup-terraform@v1
       with:
 #        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -37,7 +37,7 @@ jobs:
         aws-region: "${{ env.AWS_DEFAULT_REGION }}"
 #        cli_config_credentials_token: $ACTIONS_ID_TOKEN_REQUEST_URL
         role-to-assume: "${{ env.AWS_ROLE_ARN }}"
-#        web-identity-token-file: "${{ env.AWS_WEB_IDENTITY_TOKEN_FILE }}"
+        web-identity-token-file: "${{ env.AWS_WEB_IDENTITY_TOKEN_FILE }}"
         role-duration-seconds: 900
         role-session-name: GitHubActionsTestSession
 
