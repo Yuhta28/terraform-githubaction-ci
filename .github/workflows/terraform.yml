@@ -29,17 +29,22 @@ jobs:
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
-#      uses: aws-actions/configure-aws-credentials@v1
-      uses: hashicorp/setup-terraform@v1
+      uses: aws-actions/configure-aws-credentials@v1
+#      uses: hashicorp/setup-terraform@v1
       with:
 #        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
 #        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#        aws-region: ap-northeast-1
+        aws-region: "${{ env.AWS_DEFAULT_REGION }}"
         cli_config_credentials_token: $ACTIONS_ID_TOKEN_REQUEST_URL
+        role-to-assume: "${{ env.AWS_ROLE_ARN }}"
+        web-identity-token-file: "${{ env.AWS_WEB_IDENTITY_TOKEN_FILE }}"
+        role-duration-seconds: 900
+        role-session-name: GitHubActionsTestSession
+
     
-    # SSH connection
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+#    # SSH connection
+#    - name: Setup tmate session
+#      uses: mxschmitt/action-tmate@v3
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
