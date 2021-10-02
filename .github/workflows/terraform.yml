@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 # .github/workflows/example.yml
 name: Example
+=======
+name: 'Terraform'
+
+>>>>>>> f51a1a2651bfe6427b7adcf7807337112647966c
 on:
   push:
 
@@ -10,7 +15,35 @@ jobs:
       id-token: write
       contents: read
     steps:
+<<<<<<< HEAD
       - run: sleep 5 # there's still a race condition for now
+=======
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+
+#   - name: Configure AWS
+#     run: |
+#       export AWS_ROLE_ARN=arn:aws:iam::aws:policy/AdministratorAccess
+#       export AWS_WEB_IDENTITY_TOKEN_FILE=/tmp/awscreds
+#       export AWS_DEFAULT_REGION=ap-northeast-1
+
+#        echo AWS_WEB_IDENTITY_TOKEN_FILE=$AWS_WEB_IDENTITY_TOKEN_FILE >> $GITHUB_ENV
+#        echo AWS_ROLE_ARN=$AWS_ROLE_ARN >> $GITHUB_ENV
+#        echo AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION >> $GITHUB_ENV#
+
+#        curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r '.value' > $AWS_WEB_IDENTITY_TOKEN_FILE
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: aws-actions/configure-aws-credentials@v1
+#      uses: hashicorp/setup-terraform@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-1
+ #       cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+>>>>>>> f51a1a2651bfe6427b7adcf7807337112647966c
 
       - name: Configure AWS
         run: |
@@ -18,6 +51,7 @@ jobs:
           export AWS_WEB_IDENTITY_TOKEN_FILE=/tmp/awscreds
           export AWS_DEFAULT_REGION=ap-northeast-1
 
+<<<<<<< HEAD
           echo AWS_WEB_IDENTITY_TOKEN_FILE=$AWS_WEB_IDENTITY_TOKEN_FILE >> $GITHUB_ENV
           echo AWS_ROLE_ARN=$AWS_ROLE_ARN >> $GITHUB_ENV
           echo AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION >> $GITHUB_ENV
@@ -26,5 +60,19 @@ jobs:
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
+=======
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      run: terraform fmt -check -diff
+
+    - name: Terraform Validate
+      run: terraform validate -no-color
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      if: github.event_name == 'pull_request'
+      run: terraform plan -no-color
+      continue-on-error: true
+>>>>>>> f51a1a2651bfe6427b7adcf7807337112647966c
 
       - run: aws s3 ls
