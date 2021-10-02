@@ -22,7 +22,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
+  profile = "${{ env.AWS_ROLE_ARN }}"
   region  = "ap-northeast-1"
 }
 
