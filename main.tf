@@ -5,12 +5,6 @@ terraform {
     region = "ap-northeast-1"
 
   }
-  # backend "remote" {
-  #   organization = "Yuta28"
-  #   workspaces {
-  #     name = "gh-actions-demo"
-  #   }
-  # }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -22,7 +16,6 @@ terraform {
 }
 
 provider "aws" {
-  profile = "${{ env.AWS_ROLE_ARN }}"
   region  = "ap-northeast-1"
 }
 
