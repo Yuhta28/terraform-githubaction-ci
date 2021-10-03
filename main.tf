@@ -5,12 +5,6 @@ terraform {
     region = "ap-northeast-1"
 
   }
-  # backend "remote" {
-  #   organization = "Yuta28"
-  #   workspaces {
-  #     name = "gh-actions-demo"
-  #   }
-  # }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -22,8 +16,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
-  region  = "ap-northeast-1"
+  region = "ap-northeast-1"
 }
 
 resource "aws_instance" "app_server_yuta" {
