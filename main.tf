@@ -17,7 +17,7 @@ terraform {
 
 provider "aws" {
   region  = "ap-northeast-1"
-  role_arn = arn:aws:iam::152231080651:role/ExampleGithubRole
+  role_arn = "arn:aws:iam::152231080651:role/ExampleGithubRole"
 }
 
 resource "aws_instance" "app_server_yuta" {
