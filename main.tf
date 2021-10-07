@@ -29,3 +29,4 @@ resource "aws_instance" "app_server_yuta" {
     Name = var.instance_name
   }
 }
+
